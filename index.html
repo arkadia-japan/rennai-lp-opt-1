@@ -76,98 +76,94 @@
             padding: 0 20px;
         }
 
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-light);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .header-countdown {
-            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        /* Target Call Section */
+        .target-call {
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 30%, #111111 70%, #050505 100%);
             color: #fff;
-            padding: 10px 16px;
-            border-radius: 6px;
-            border: 1px solid rgba(220, 38, 38, 0.6);
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            box-shadow:
-                0 2px 8px rgba(220, 38, 38, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            animation: headerCountdownPulse 4s ease-in-out infinite;
+            text-align: center;
+            padding: 30px 0;
             position: relative;
             overflow: hidden;
+            border-top: 2px solid var(--main-blue);
+            border-bottom: 2px solid var(--accent-orange);
+            box-shadow:
+                inset 0 0 30px rgba(7, 137, 199, 0.1),
+                0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .header-countdown::before {
+        .target-call::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-            animation: headerCountdownShimmer 6s linear infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 25% 25%, rgba(7, 137, 199, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(244, 161, 24, 0.08) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 98px,
+                    rgba(7, 137, 199, 0.02) 100px
+                );
+            animation: targetCallPulse 6s ease-in-out infinite alternate;
         }
 
-        .header-countdown-text {
-            font-size: 10px;
-            margin-bottom: 2px;
-            position: relative;
-            z-index: 2;
-            text-transform: uppercase;
-            opacity: 0.9;
+        .target-call::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(7, 137, 199, 0.03) 50%, transparent 70%);
+            animation: targetCallSweep 8s linear infinite;
         }
 
-        .header-countdown-time {
-            font-size: 16px;
-            font-weight: 700;
-            position: relative;
-            z-index: 2;
-            letter-spacing: 0.15em;
-        }
-
-        @keyframes headerCountdownPulse {
-            0%, 100% {
+        @keyframes targetCallPulse {
+            0% {
+                opacity: 0.6;
                 transform: scale(1);
-                box-shadow:
-                    0 2px 8px rgba(220, 38, 38, 0.25),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
             }
-            50% {
+            100% {
+                opacity: 1;
                 transform: scale(1.02);
-                box-shadow:
-                    0 3px 12px rgba(220, 38, 38, 0.35),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
             }
         }
 
-        @keyframes headerCountdownShimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
+        @keyframes targetCallSweep {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--main-blue);
-            text-decoration: none;
-            letter-spacing: 0.1em;
+        .target-call-content {
+            position: relative;
+            z-index: 1;
         }
+
+        .target-call-text {
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 900;
+            line-height: 1.3;
+            margin: 0;
+            letter-spacing: 0.01em;
+            text-shadow:
+                0 2px 15px rgba(7, 137, 199, 0.3),
+                0 4px 25px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 3;
+        }
+
+        .target-call-text span {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-yellow) 50%, #ffaa44 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
 
         /* CTA Button */
         .cta-button {
@@ -235,7 +231,7 @@
             background-position: center;
             background-attachment: fixed;
             color: #fff;
-            padding: 80px 0;
+            padding: 120px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -277,31 +273,36 @@
         }
 
         .hero h1 {
-            font-size: clamp(26px, 5vw, 42px);
-            font-weight: 800;
-            line-height: 1.3;
-            margin-bottom: 40px;
-            letter-spacing: 0.03em;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            animation: slideInUp 1s ease-out;
-        }
-
-        .hero .subtitle {
-            font-size: clamp(20px, 4vw, 28px);
-            font-weight: 700;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, var(--accent-yellow) 0%, #fff5a5 100%);
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 50px;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, #fff5a5 50%, var(--accent-orange) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: 0.08em;
-            text-shadow: 0 2px 10px rgba(249, 234, 89, 0.3);
-            animation: slideInUp 1s ease-out 0.2s both;
+            text-shadow: 0 4px 25px rgba(249, 234, 89, 0.4);
+            animation: slideInUp 1s ease-out;
+            position: relative;
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-yellow) 100%);
+            border-radius: 2px;
+            opacity: 0.8;
         }
 
         .hero .description {
             font-size: 19px;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             max-width: 650px;
             margin-left: auto;
             margin-right: auto;
@@ -394,7 +395,7 @@
         /* CTA Intro Section */
         .cta-intro {
             background:
-                linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.9) 100%),
+                linear-gradient(135deg, rgba(220, 220, 230, 0.9) 0%, rgba(200, 200, 215, 0.85) 50%, rgba(220, 220, 230, 0.9) 100%),
                 url('./images/cta-intro-bg.jpg');
             background-size: cover;
             background-position: center;
@@ -561,8 +562,32 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(255, 255, 255, 0.9);
+            background:
+                radial-gradient(circle at 30% 30%, rgba(0, 50, 30, 0.7) 0%, rgba(0, 30, 20, 0.8) 100%),
+                linear-gradient(135deg, rgba(7, 137, 199, 0.1) 0%, rgba(0, 60, 40, 0.9) 50%, rgba(244, 161, 24, 0.1) 100%);
             pointer-events: none;
+        }
+
+        #method .container {
+            position: relative;
+            z-index: 3;
+        }
+
+        #method .section-title {
+            color: #fff;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 3;
+        }
+
+        #method .method-intro {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow:
+                var(--shadow-heavy),
+                0 0 30px rgba(0, 0, 0, 0.2);
         }
 
         @keyframes methodGlow {
@@ -574,11 +599,6 @@
                 transform: scale(1.2) rotate(10deg);
                 opacity: 1;
             }
-        }
-
-        #method .container {
-            position: relative;
-            z-index: 1;
         }
 
         .section-title {
@@ -838,6 +858,37 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .profile-image {
+            flex-shrink: 0;
+            width: 200px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+            border: 2px solid var(--glass-border);
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(7, 137, 199, 0.1), rgba(244, 161, 24, 0.1));
+            z-index: -1;
+        }
+
+        .profile-content {
+            flex: 1;
         }
 
         .profile-header {
@@ -979,15 +1030,87 @@
             transform: translateY(0);
         }
 
+        /* Fixed Footer */
+        .fixed-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, #1a2332 50%, var(--main-blue) 100%);
+            color: #fff;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+            padding: 25px 0;
+        }
+
+        .fixed-footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fixed-cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-orange) 0%, #ff6b35 100%);
+            color: #fff;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .fixed-cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .fixed-cta-button:hover::before {
+            left: 100%;
+        }
+
+        .fixed-cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-heavy);
+            background: linear-gradient(135deg, #ff6b35 0%, var(--accent-orange) 100%);
+        }
+
+        .fixed-countdown-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
+            .target-call {
+                padding: 20px 0;
+            }
+
+            .target-call-text {
+                font-size: clamp(16px, 4vw, 22px);
             }
 
             .hero {
-                padding: 60px 0;
+                padding: 80px 0;
             }
 
             .hero::before {
@@ -1008,6 +1131,17 @@
 
             .profile-card {
                 padding: 40px 25px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-image {
+                width: 150px;
+                align-self: center;
+            }
+
+            .profile-image img {
+                height: 150px;
             }
 
             .lessons-grid {
@@ -1017,6 +1151,19 @@
 
             .cta-content {
                 padding: 60px 0;
+            }
+
+            .fixed-footer {
+                padding: 16px 0;
+            }
+
+            .fixed-cta-button {
+                padding: 14px 32px;
+                font-size: 16px;
+            }
+
+            .fixed-countdown-text {
+                font-size: 12px;
             }
         }
 
@@ -1049,6 +1196,17 @@
 
             .profile-card {
                 padding: 30px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-image {
+                width: 120px;
+                align-self: center;
+            }
+
+            .profile-image img {
+                height: 120px;
             }
 
             .lessons-grid {
@@ -1100,33 +1258,28 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo" aria-label="令和の恋愛法則 ホーム">令和の恋愛法則</a>
-                <div class="header-countdown">
-                    <div class="header-countdown-text">公開終了まで</div>
-                    <div class="header-countdown-time" id="header-countdown">●時間●分●秒</div>
-                </div>
-                <a href="#entry" class="cta-button" aria-label="今すぐセミナーを観る">今すぐセミナーを観る</a>
-            </div>
-        </div>
-    </header>
 
     <main>
+        <!-- Target Call Section -->
+        <section class="target-call">
+            <div class="container">
+                <div class="target-call-content">
+                    <p class="target-call-text">
+                        なぜ、勉強や仕事はうまくいってるのに、<br>
+                        <span>恋愛だけがうまくいかない</span>のか？
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
                 <h1>
-                    なぜ、勉強や仕事はうまくいってるのに、<br>
-                    恋愛だけがうまくいかないのか？
-                </h1>
-                <p class="subtitle">
                     "モテる男"を目指さず<br>
                     本命彼女から選ばれる<br>
                     『令和の恋愛法則』
-                </p>
+                </h1>
                 <p class="description">
                     あなたらしく自然体で<br>
                     本命女性の『唯一無二』の男になれる<br>
@@ -1263,11 +1416,13 @@
                 <h2 class="section-title">講師プロフィール</h2>
 
                 <div class="profile-card">
-                    <div class="profile-header">
-                        <h3>けいじ｜「いい人止まり」を"唯一無二の魅力"に変える恋愛戦略家</h3>
+                    <div class="profile-image">
+                        <img src="./images/profile-photo.jpg" alt="講師プロフィール写真" />
                     </div>
-
                     <div class="profile-content">
+                        <div class="profile-header">
+                            <h3>けいじ｜「いい人止まり」を"唯一無二の魅力"に変える恋愛戦略家</h3>
+                        </div>
                         <p>26年間「いい人」止まりの状態から独学で恋愛ノウハウを構築。アプリやストリートで、250人以上の女性を口説くことに成功した後、1人の愛する女性と出会い結婚。</p>
 
                         <p>圧倒的な実践経験と脳科学・心理学を融合し「誠実さや優しさが武器になる」独自メソッド『THE ONLY ONE』を確立。</p>
@@ -1292,13 +1447,28 @@
     <footer>
         <div class="container">
             <div class="footer-content">
+                <h3 style="color: #fff; margin-bottom: 20px; font-size: 24px; font-weight: 700;">令和の恋愛法則</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 30px; line-height: 1.6;">
+                    誠実な男性のための恋愛ノウハウを提供しています。<br>
+                    あなたらしく自然体で、本命女性から選ばれる男性になりませんか？
+                </p>
                 <a href="#entry" class="cta-button cta-button-large" aria-label="今すぐセミナーを観る">今すぐセミナーを観る</a>
             </div>
             <div class="footer-copyright">
-                <p>&copy; 2024 令和の恋愛法則. All rights reserved.</p>
+                <p>&copy; 2024 THE ONLY ONE by Arkadia. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Fixed Footer -->
+    <div class="fixed-footer">
+        <div class="container">
+            <div class="fixed-footer-content">
+                <a href="#entry" class="fixed-cta-button" aria-label="今すぐセミナーを観る">今すぐセミナーを観る</a>
+                <div class="fixed-countdown-text" id="fixed-countdown">公開終了まで 12:34:56</div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Smooth scroll functionality
@@ -1415,7 +1585,7 @@
             document.head.appendChild(style);
 
             // Smooth scroll for CTA buttons
-            const ctaButtons = document.querySelectorAll('a[href="#entry"]');
+            const ctaButtons = document.querySelectorAll('a[href="#entry"], .fixed-cta-button');
             ctaButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1431,8 +1601,8 @@
 
             // Enhanced countdown functionality
             function initCountdown() {
-                const headerCountdownElement = document.getElementById('header-countdown');
-                if (!headerCountdownElement) return;
+                const fixedCountdownElement = document.getElementById('fixed-countdown');
+                if (!fixedCountdownElement) return;
 
                 // Set deadline to 12 hours from now
                 const now = new Date();
@@ -1444,8 +1614,7 @@
                     const timeLeft = deadlineTime - now;
 
                     if (timeLeft <= 0) {
-                        headerCountdownElement.innerHTML = '終了';
-                        headerCountdownElement.parentElement.style.animation = 'headerCountdownPulse 0.5s ease-in-out infinite';
+                        fixedCountdownElement.innerHTML = '公開終了';
                         return;
                     }
 
@@ -1453,12 +1622,7 @@
                     const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-                    headerCountdownElement.innerHTML = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-                    // Add urgency animation when less than 1 hour
-                    if (timeLeft < 3600000) {
-                        headerCountdownElement.parentElement.style.animation = 'headerCountdownPulse 0.8s ease-in-out infinite';
-                    }
+                    fixedCountdownElement.innerHTML = `公開終了まで ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 }
 
                 // Update countdown immediately and then every second
