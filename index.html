@@ -43,6 +43,7 @@
             background: linear-gradient(135deg, #f8fafe 0%, #ffffff 50%, #f0f7ff 100%);
             background-attachment: fixed;
             overflow-x: hidden;
+            margin-bottom: 120px; /* 固定フッターの高さ分のマージンを追加 */
         }
 
         /* Color Variables */
@@ -1101,6 +1102,10 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            body {
+                margin-bottom: 100px; /* モバイルでは固定フッターが小さいので調整 */
+            }
+
             .target-call {
                 padding: 20px 0;
             }
@@ -1168,6 +1173,10 @@
         }
 
         @media (max-width: 375px) {
+            body {
+                margin-bottom: 90px; /* 小さい画面ではさらに調整 */
+            }
+
             .container {
                 padding: 0 15px;
             }
