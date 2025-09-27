@@ -17,6 +17,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
 
+    <!-- Form CSS -->
+    <link rel="stylesheet" type="text/css" href="https://arkadia-japan.com/p/format_css?item_id=zKt1IXa0&format=div&form_align=&label_align=&radio_float=&checkbox_float=&label_width=0&input_width=0&theme_name=3_7&ver=3" />
+    <link rel="stylesheet" type="text/css" href="https://arkadia-japan.com/p/mobile_css?item_id=zKt1IXa0&format=div&form_align=&label_align=&radio_float=&checkbox_float=&label_width=0&input_width=0&theme_name=3_7&ver=3" />
+    <link rel="stylesheet" type="text/css" href="https://arkadia-japan.com/css/form/myasp-ui-form.css?d=20250810224710">
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -1100,6 +1105,7 @@
             letter-spacing: 0.05em;
         }
 
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             body {
@@ -1170,6 +1176,7 @@
             .fixed-countdown-text {
                 font-size: 12px;
             }
+
         }
 
         @media (max-width: 375px) {
@@ -1221,6 +1228,7 @@
             .lessons-grid {
                 grid-template-columns: 1fr;
             }
+
         }
 
         /* Accessibility */
@@ -1262,6 +1270,228 @@
 
             .cta-section::before {
                 animation: none;
+            }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-container {
+            background: #fff;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: var(--main-blue);
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(135deg, var(--main-blue) 0%, var(--dark-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: #333;
+            background: rgba(244, 161, 24, 0.1);
+            transform: scale(1.1);
+        }
+
+        .modal-content {
+            padding: 0 30px 30px;
+        }
+
+        .content_title h3 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-orange) 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            letter-spacing: 0.03em;
+        }
+
+        .content_form form > div {
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 50%, #f9f9f9 100%) !important;
+            border: 2px solid rgba(7, 137, 199, 0.1) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .content_form input[type="email"],
+        .content_form input[type="text"] {
+            transition: all 0.3s ease !important;
+            border: 2px solid #ddd !important;
+            background: #fff !important;
+            box-sizing: border-box !important;
+        }
+
+        .content_form input[type="email"]:focus,
+        .content_form input[type="text"]:focus {
+            border-color: var(--main-blue) !important;
+            box-shadow: 0 0 10px rgba(7, 137, 199, 0.3) !important;
+            outline: none !important;
+        }
+
+        /* バリデーションエラー時のスタイル */
+        .content_form input:invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 10px rgba(220, 53, 69, 0.3) !important;
+        }
+
+        .content_form input.error {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 10px rgba(220, 53, 69, 0.3) !important;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* モバイル用のフォームレイアウト調整 */
+        @media (max-width: 480px) {
+            .content_form .name-fields {
+                flex-direction: column !important;
+                gap: 15px !important;
+            }
+        }
+
+        .content_form button[type="submit"] {
+            position: relative !important;
+            overflow: hidden !important;
+            transform: translateY(0) !important;
+        }
+
+        .content_form button[type="submit"]::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .content_form button[type="submit"]:hover {
+            transform: translateY(-2px) scale(1.02) !important;
+            box-shadow: 0 15px 35px rgba(244, 161, 24, 0.4) !important;
+        }
+
+        .content_form button[type="submit"]:hover::before {
+            left: 100%;
+        }
+
+        /* Mobile Modal Responsive */
+        @media (max-width: 768px) {
+            .modal-container {
+                width: 95%;
+                max-height: 95vh;
+                border-radius: 15px;
+            }
+
+            .modal-header {
+                padding: 20px 20px 0;
+            }
+
+            .modal-header h2 {
+                font-size: 20px;
+            }
+
+            .modal-content {
+                padding: 0 20px 20px;
+            }
+
+            .content_title h3 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .modal-container {
+                width: 98%;
+                border-radius: 10px;
+            }
+
+            .modal-header {
+                padding: 15px 15px 0;
+            }
+
+            .modal-header h2 {
+                font-size: 18px;
+            }
+
+            .modal-content {
+                padding: 0 15px 15px;
+            }
+
+            .content_title h3 {
+                font-size: 22px;
             }
         }
     </style>
@@ -1452,6 +1682,93 @@
         </section>
     </main>
 
+    <!-- Modal Overlay -->
+    <div id="form-modal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>無料動画講座を受け取る</h2>
+                <button class="modal-close" aria-label="閉じる">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="content_title">
+                    <h3>THE ONLY ONE</h3>
+                </div>
+                <div class="content_form">
+                    <form action="https://arkadia-japan.com/p/r/zKt1IXa0" enctype="multipart/form-data" id="UserItemForm" class="myForm" method="post" accept-charset="utf-8">
+                        <input type="hidden" name="_method" value="POST"/>
+
+                        <div style="padding: 20px; background: #f9f9f9; border-radius: 10px;">
+                            <p style="text-align: center; margin-bottom: 20px; font-weight: bold; color: #333;">7日間の無料動画講座をお届けします</p>
+
+                            <!-- お名前フィールド -->
+                            <div class="input text input_unit required" style="margin-bottom: 15px;">
+                                <label for="Username1" style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">お名前（必須）</label>
+                                <input name="data[User][name1]" id="Username1" value="" class="required" type="text" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px; box-sizing: border-box;" placeholder="山田太郎"/>
+                                <div class="error-message" id="name-error">お名前を入力してください</div>
+                            </div>
+
+                            <!-- メールアドレス -->
+                            <div class="input text input_unit required" style="margin-bottom: 20px;">
+                                <label for="Usermail" style="display: block; margin-bottom: 5px; font-weight: bold; color: #555;">メールアドレス（必須）</label>
+                                <input name="data[User][mail]" id="Usermail" value="" class="required" type="email" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px; box-sizing: border-box;" placeholder="example@email.com"/>
+                                <div class="error-message" id="email-error">有効なメールアドレスを入力してください</div>
+                            </div>
+
+                            <!-- 確認ボタン -->
+                            <div class="submit form_input_submit">
+                                <input type="submit" value="今すぐ無料で受け取る" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #f4a118 0%, #ff6b35 100%); color: white; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s ease;"/>
+                            </div>
+
+                            <p style="text-align: center; margin-top: 15px; font-size: 12px; color: #888;">
+                                ※迷惑メールフォルダもご確認ください<br>
+                                ※いつでも配信停止できます
+                            </p>
+                        </div>
+
+                        <input type="hidden" id="server_url" value="https://arkadia-japan.com/"/>
+
+                        <!-- ▼リファラ -->
+                        <input type="hidden" name="data[User][referer_form_url]" value="" class="UserRefererFormUrl"/>
+                        <input type="hidden" name="data[User][referer_url]" value="" class="UserRefererUrl"/>
+
+                        <script type="text/javascript">
+                        //<!--
+                            if (document.referrer.length !=0 ){
+                                if (document.getElementsByClassName("UserRefererUrl"))
+                                {
+                                var user_referer_url = document.getElementsByClassName("UserRefererUrl");
+                                for (var i = 0; i < user_referer_url.length; i++)
+                                {
+                                    user_referer_url[i].value = document.referrer;
+                                }
+                                }
+                                else if (document.getElementById("UserRefererUrl"))
+                                {
+                                    document.getElementById("UserRefererUrl").value = document.referrer;
+                                }
+                            }
+
+                            if (document.getElementsByClassName("UserRefererFormUrl"))
+                            {
+                                var user_referer_form_url = document.getElementsByClassName("UserRefererFormUrl");
+                                for (var i = 0; i < user_referer_form_url.length; i++)
+                                {
+                                    user_referer_form_url[i].value = location.href;
+                                }
+                            }
+                            else if (document.getElementById("UserRefererFormUrl"))
+                            {
+                                document.getElementById("UserRefererFormUrl").value = location.href;
+                            }
+                        //-->
+                        </script>
+                        <!-- ▲リファラ -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1593,20 +1910,121 @@
             `;
             document.head.appendChild(style);
 
-            // Smooth scroll for CTA buttons
-            const ctaButtons = document.querySelectorAll('a[href="#entry"], .fixed-cta-button');
-            ctaButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector('#entry');
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+            // Modal functionality
+            function initModal() {
+                const modal = document.getElementById('form-modal');
+                const ctaButtons = document.querySelectorAll('a[href="#entry"], .fixed-cta-button');
+                const closeButton = document.querySelector('.modal-close');
+
+                // CTAボタンクリック時にモーダル表示
+                ctaButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+
+                        // フォーカス管理
+                        const firstInput = modal.querySelector('#Usermail');
+                        if (firstInput) {
+                            setTimeout(() => firstInput.focus(), 300);
+                        }
+                    });
+                });
+
+                // 閉じるボタン
+                if (closeButton) {
+                    closeButton.addEventListener('click', function() {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                }
+
+                // オーバーレイクリックで閉じる
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = '';
                     }
                 });
-            });
+
+                // ESCキーで閉じる
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && modal.classList.contains('active')) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+
+                // フォームバリデーション処理
+                const modalForm = modal.querySelector('form');
+                if (modalForm) {
+                    modalForm.addEventListener('submit', function(e) {
+                        const nameInput = modal.querySelector('#Username1');
+                        const emailInput = modal.querySelector('#Usermail');
+                        const nameError = modal.querySelector('#name-error');
+                        const emailError = modal.querySelector('#email-error');
+
+                        let hasError = false;
+
+                        // お名前のバリデーション
+                        if (!nameInput.value.trim()) {
+                            nameInput.classList.add('error');
+                            nameError.classList.add('show');
+                            hasError = true;
+                        } else {
+                            nameInput.classList.remove('error');
+                            nameError.classList.remove('show');
+                        }
+
+                        // メールアドレスのバリデーション
+                        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailInput.value.trim() || !emailPattern.test(emailInput.value)) {
+                            emailInput.classList.add('error');
+                            emailError.classList.add('show');
+                            hasError = true;
+                        } else {
+                            emailInput.classList.remove('error');
+                            emailError.classList.remove('show');
+                        }
+
+                        if (hasError) {
+                            e.preventDefault();
+                            return false;
+                        }
+
+                        // フォームが正常に送信されるよう、一時的にオーバーフローを戻す
+                        setTimeout(() => {
+                            document.body.style.overflow = '';
+                        }, 100);
+                    });
+
+                    // リアルタイムバリデーション
+                    const nameInput = modal.querySelector('#Username1');
+                    const emailInput = modal.querySelector('#Usermail');
+
+                    if (nameInput) {
+                        nameInput.addEventListener('input', function() {
+                            if (this.value.trim()) {
+                                this.classList.remove('error');
+                                modal.querySelector('#name-error').classList.remove('show');
+                            }
+                        });
+                    }
+
+                    if (emailInput) {
+                        emailInput.addEventListener('input', function() {
+                            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (this.value.trim() && emailPattern.test(this.value)) {
+                                this.classList.remove('error');
+                                modal.querySelector('#email-error').classList.remove('show');
+                            }
+                        });
+                    }
+                }
+            }
+
+            // Smooth scroll for CTA buttons (既存のイベントをモーダル用に変更)
+            // 既存のCTAボタンの処理は上記のinitModal()で処理
 
             // Enhanced countdown functionality
             function initCountdown() {
@@ -1670,6 +2088,7 @@
             createCTAParticles();
             setupIntersectionObserver();
             enhanceCTAButtons();
+            initModal(); // モーダル機能を初期化
             initCountdown();
             initParallax();
 
@@ -1718,5 +2137,9 @@
             });
         }
     </script>
+
+    <!-- Validation Script -->
+    <script src="https://arkadia-japan.com/js/validation.js?d=20250927164145"></script>
+
 </body>
 </html>
